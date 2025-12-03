@@ -8,20 +8,20 @@
   <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/StaticQuasar931/Images@main/icon.png" />
 
   <title>Wake Up The Box Unblocked Collection - StaticQuasar931</title>
-  <meta name="description" content="Play Wake Up The Box 1, 2, 3, 4, and 5 unblocked on StaticQuasar931. Classic physics puzzle games where you wake up the sleepy box using blocks, shapes, and clever tricks. School-safe and working at school, work, and home." />
-  <meta name="keywords" content="Wake Up The Box, Wake Up The Box 1, Wake Up The Box 2, Wake Up The Box 3, Wake Up The Box 4, Wake Up The Box 5, Wake Up The Box unblocked, Wake Up The Box 1 unblocked, Wake Up The Box 2 unblocked, Wake Up The Box 3 unblocked, Wake Up The Box 4 unblocked, Wake Up The Box 5 unblocked, Wake Up The Box game, Wake Up The Box g@me, Wake Up The Box 1 game, Wake Up The Box 1 g@me, Wake Up The Box 2 game, Wake Up The Box 2 g@me, Wake Up The Box 3 game, Wake Up The Box 3 g@me, Wake Up The Box 4 game, Wake Up The Box 4 g@me, Wake Up The Box 5 game, Wake Up The Box 5 g@me, physics puzzle game unblocked, puzzle games working at school, school-safe puzzle game, StaticQuasar931, staticquasar931, static quasar, static 931, staticq, staticq931, unblocked games, unblocked g@mes, free school games, free school g@mes" />
+  <meta name="description" content="Play Wake Up The Box 1, 2, 3, 4, and 5 unblocked on StaticQuasar931. Classic physics puzzle games where you wake up the sleepy box using blocks, shapes, and clever tricks. School safe and working at school, work, and home." />
+  <meta name="keywords" content="Wake Up The Box, Wake Up The Box 1, Wake Up The Box 2, Wake Up The Box 3, Wake Up The Box 4, Wake Up The Box 5, Wake Up The Box unblocked, Wake Up The Box 1 unblocked, Wake Up The Box 2 unblocked, Wake Up The Box 3 unblocked, Wake Up The Box 4 unblocked, Wake Up The Box 5 unblocked, Wake Up The Box game, Wake Up The Box g@me, Wake Up The Box 1 game, Wake Up The Box 1 g@me, Wake Up The Box 2 game, Wake Up The Box 2 g@me, Wake Up The Box 3 game, Wake Up The Box 3 g@me, Wake Up The Box 4 game, Wake Up The Box 4 g@me, Wake Up The Box 5 game, Wake Up The Box 5 g@me, physics puzzle game unblocked, puzzle games working at school, school safe puzzle game, StaticQuasar931, staticquasar931, static quasar, static 931, staticq, staticq931, unblocked games, unblocked g@mes, free school games, free school g@mes" />
   <link rel="canonical" href="https://sites.google.com/view/staticquasar931/gm3z/wake-up-the-box-collection" />
 
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Wake Up The Box Unblocked Collection - StaticQuasar931" />
-  <meta property="og:description" content="Choose from Wake Up The Box 1, 2, 3, 4, and 5 and play them unblocked with Ruffle. Classic physics puzzle games, school-safe and Chromebook friendly." />
+  <meta property="og:description" content="Choose from Wake Up The Box 1, 2, 3, 4, and 5 and play them unblocked with Ruffle. Classic physics puzzle games, school safe and Chromebook friendly." />
   <meta property="og:url" content="https://sites.google.com/view/staticquasar931/gm3z/wake-up-the-box-collection" />
   <meta property="og:image" content="https://cdn.jsdelivr.net/gh/StaticQuasar931/Images@main/icon.png" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Wake Up The Box Unblocked Collection - StaticQuasar931" />
-  <meta name="twitter:description" content="Play every Wake Up The Box game unblocked - select Wake Up The Box 1, 2, 3, 4, or 5 and start solving physics puzzles instantly." />
+  <meta name="twitter:description" content="Play every Wake Up The Box game unblocked. Select Wake Up The Box 1, 2, 3, 4, or 5 and start solving physics puzzles instantly." />
   <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/StaticQuasar931/Images@main/icon.png" />
 
   <style>
@@ -46,7 +46,7 @@
       display:block;
     }
 
-    /* Main game layout - fullscreen */
+    /* Main game layout fullscreen */
     main#game-root{
       position:fixed;
       inset:0;
@@ -77,9 +77,9 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:0 12px;
+      padding:0 10px 0 14px;
       box-sizing:border-box;
-      font-size:13px;
+      font-size:12px;
       letter-spacing:.05em;
       text-transform:uppercase;
       color:rgba(220,240,255,.85);
@@ -90,22 +90,52 @@
 
     #activeGameName{
       text-shadow:0 0 6px rgba(0,0,0,.8);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width:70%;
     }
 
-    #switchGameBtn{
-      padding:4px 10px;
+    #barControls{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    #switchGameBtn,
+    #toggleBarBtn{
+      padding:3px 9px;
       border-radius:999px;
       border:1px solid rgba(94,225,255,.6);
       background:rgba(10,18,30,.9);
       color:#cfe9ff;
-      font-size:11px;
+      font-size:10px;
       cursor:pointer;
       text-transform:uppercase;
       letter-spacing:.08em;
     }
 
+    #toggleBarBtn{
+      border-color:rgba(200,200,255,.5);
+      font-size:9px;
+    }
+
     #switchGameBtn:hover{
       background:rgba(20,35,55,.95);
+    }
+
+    #toggleBarBtn:hover{
+      background:rgba(26,28,40,.95);
+    }
+
+    #activeGameBar.collapsed{
+      height:18px;
+      padding:0 8px;
+      font-size:10px;
+    }
+
+    #activeGameBar.collapsed #switchGameBtn{
+      display:none;
     }
 
     ruffle-player{
@@ -113,6 +143,11 @@
       height:100%;
       display:block;
       background:#000;
+    }
+
+    /* hide Ruffle built in toolbar if present */
+    ruffle-player::part(controls){
+      display:none !important;
     }
 
     .game-fallback{
@@ -134,7 +169,7 @@
       color:#5ee1ff;
     }
 
-    /* Game chooser overlay */
+    /* Game chooser overlay nicer */
     #gameChooserOverlay{
       position:absolute;
       inset:0;
@@ -147,27 +182,46 @@
     }
 
     #gameChooserCard{
-      width:90%;
-      max-width:520px;
-      padding:22px 20px 18px;
-      border-radius:18px;
+      width:92%;
+      max-width:560px;
+      padding:22px 22px 18px;
+      border-radius:20px;
       background:linear-gradient(145deg, rgba(8,12,22,.98), rgba(20,28,46,.96));
       border:1px solid rgba(94,225,255,.4);
       box-shadow:var(--glow), var(--shadow);
       box-sizing:border-box;
+      position:relative;
+    }
+
+    #chooserHeader{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
     }
 
     #gameChooserTitle{
       font-size:18px;
       font-weight:700;
-      margin:0 0 6px;
-      text-align:center;
+      margin:0;
+    }
+
+    #chooserTag{
+      font-size:10px;
+      padding:2px 8px;
+      border-radius:999px;
+      border:1px solid rgba(155,255,183,.7);
+      color:#d7ffe7;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      background:rgba(8,28,20,.9);
     }
 
     #gameChooserSubtitle{
       font-size:13px;
-      margin:0 0 16px;
-      text-align:center;
+      margin:0 0 14px;
+      text-align:left;
       color:rgba(220,235,255,.8);
     }
 
@@ -187,6 +241,7 @@
       text-align:left;
       font-size:13px;
       box-shadow:0 0 0 1px rgba(3,8,15,.4);
+      position:relative;
     }
 
     .gameOption:hover{
@@ -194,13 +249,32 @@
       box-shadow:0 0 0 1px rgba(94,225,255,.8);
     }
 
+    .gameOption.primary{
+      border-color:rgba(155,255,183,.9);
+      box-shadow:0 0 0 1px rgba(155,255,183,.8), var(--shadow);
+    }
+
     .gameOption span.versionTag{
       display:inline-block;
       font-size:11px;
       text-transform:uppercase;
       letter-spacing:.09em;
-      opacity:.85;
+      opacity:.9;
       color:#9fe8ff;
+    }
+
+    .gameBadge{
+      position:absolute;
+      top:6px;
+      right:8px;
+      font-size:9px;
+      padding:1px 6px;
+      border-radius:999px;
+      border:1px solid rgba(255,230,140,.9);
+      color:#fff2bf;
+      background:rgba(60,40,5,.95);
+      text-transform:uppercase;
+      letter-spacing:.13em;
     }
 
     .gameOption p{
@@ -211,7 +285,7 @@
 
     #gameChooserHint{
       font-size:11px;
-      text-align:center;
+      text-align:left;
       color:rgba(190,214,255,.8);
     }
 
@@ -221,6 +295,24 @@
       padding:2px 4px;
       border-radius:4px;
       border:1px solid rgba(94,225,255,.4);
+    }
+
+    #closeChooserSmall{
+      position:absolute;
+      top:10px;
+      right:12px;
+      font-size:11px;
+      cursor:pointer;
+      opacity:.75;
+      padding:2px 6px;
+      border-radius:999px;
+      border:1px solid rgba(200,220,255,.4);
+      background:rgba(12,16,30,.9);
+    }
+
+    #closeChooserSmall:hover{
+      opacity:1;
+      background:rgba(22,26,40,.95);
     }
 
     @media (max-width:600px){
@@ -233,25 +325,28 @@
       #gameList{
         grid-template-columns:1fr;
       }
+      #activeGameBar{
+        font-size:11px;
+      }
     }
 
-    /* Static Menu (top-left) */
+    /* Static Menu moved to bottom right */
     #staticMenu{
       position:fixed;
-      left:12px;
-      top:12px;
-      z-index:9999;
+      right:12px;
+      bottom:12px;
+      z-index:9998;
       display:flex;
       gap:10px;
       align-items:center;
       user-select:none;
-      padding:10px 14px;
+      padding:8px 12px;
       border-radius:12px;
       background:linear-gradient(135deg, rgba(20,20,28,.9), rgba(20,20,28,.6));
       border:1px solid rgba(94,225,255,.35);
       color:#e8f3ff;
       box-shadow:var(--glow), var(--shadow);
-      font-size:14px;
+      font-size:13px;
       animation:menuEnter .6s ease .15s both;
     }
     #staticMenu a{
@@ -268,18 +363,18 @@
       background:rgba(255,255,255,.06);
     }
     @keyframes menuEnter{
-      from{opacity:0; transform:translateY(-8px);}
+      from{opacity:0; transform:translateY(8px);}
       to{opacity:1; transform:translateY(0);}
     }
 
-    /* Rotating slide-in widget (bottom-right) */
+    /* Rotating slide in widget above menu so they do not overlap */
     #staticSlideMenu{
       position:fixed;
-      bottom:24px;
+      bottom:110px;
       right:24px;
       z-index:9999;
-      width:100px;
-      height:100px;
+      width:90px;
+      height:90px;
       pointer-events:none;
       opacity:0;
       transform:translateX(140px) scale(.96);
@@ -324,16 +419,29 @@
       white-space:nowrap;
     }
   </style>
+
+  <!-- Ruffle config, including hiding download and menu bits -->
+  <script>
+    window.RufflePlayer = window.RufflePlayer || {};
+    window.RufflePlayer.config = {
+      autoplay: "on",
+      quality: "high",
+      showSwfDownload: false,
+      contextMenu: "off",
+      unmuteOverlay: "hidden"
+    };
+  </script>
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
 </head>
 <body>
 
-  <!-- Static Menu (shows on load, hides 3 minutes when closed, then returns) -->
+  <!-- Static Menu (now bottom right) -->
   <div id="staticMenu" role="region" aria-label="StaticQuasar menu">
     <a href="https://sites.google.com/view/staticquasar931/gm3z" target="_blank" rel="noopener">More Unblocked Games by Static</a>
     <span id="closeStaticMenu" title="Hide temporarily">✕</span>
   </div>
 
-  <!-- Rotating quick link widget (bottom-right). Order: Google Form -> Discord -> Instagram -->
+  <!-- Rotating quick link widget. Order: Google Form -> Discord -> Instagram -->
   <div id="staticSlideMenu" aria-live="polite">
     <a id="staticSlideLink" href="https://sites.google.com/view/staticquasar931/google-form" target="_blank" rel="noopener" aria-label="Open Google Form">
       <img id="staticSlideImg" src="https://cdn.jsdelivr.net/gh/StaticQuasar931/Images@main/GoogleForm.png" alt="StaticQuasar931 Google Form for feedback and requests">
@@ -345,7 +453,10 @@
     <div id="gameContainer">
       <div id="activeGameBar">
         <div id="activeGameName">Select a Wake Up The Box game to start</div>
-        <button id="switchGameBtn" type="button">Switch Game / Version</button>
+        <div id="barControls">
+          <button id="switchGameBtn" type="button">Switch Game</button>
+          <button id="toggleBarBtn" type="button" title="Show or hide bar">Bar</button>
+        </div>
       </div>
 
       <!-- Ruffle fallback message -->
@@ -361,14 +472,21 @@
       <!-- Game chooser overlay -->
       <div id="gameChooserOverlay">
         <div id="gameChooserCard">
-          <h1 id="gameChooserTitle">Wake Up The Box unblocked collection</h1>
+          <div id="chooserHeader">
+            <h1 id="gameChooserTitle">Wake Up The Box collection</h1>
+            <span id="chooserTag">Unblocked</span>
+          </div>
           <p id="gameChooserSubtitle">
-            Choose a version to load in the fullscreen Ruffle player. You can switch versions anytime using the
-            Switch Game button at the top.
+            Choose a version to load in the fullscreen Ruffle player. You can switch versions any time using
+            the Switch Game button at the top bar.
           </p>
+          <button id="closeChooserSmall" type="button" title="Close menu and keep current game">
+            hide menu
+          </button>
           <div id="gameList">
-            <button class="gameOption" data-game-id="wutb1" type="button">
+            <button class="gameOption primary" data-game-id="wutb1" type="button">
               <span class="versionTag">Wake Up The Box 1</span>
+              <span class="gameBadge">Recommended</span>
               <p>Original physics puzzle where you wake up the sleepy box with simple wooden shapes.</p>
             </button>
             <button class="gameOption" data-game-id="wutb2" type="button">
@@ -377,11 +495,11 @@
             </button>
             <button class="gameOption" data-game-id="wutb3" type="button">
               <span class="versionTag">Wake Up The Box 3</span>
-              <p>New mechanics and level designs to test your puzzle skills.</p>
+              <p>New mechanics and level designs that boost the challenge.</p>
             </button>
             <button class="gameOption" data-game-id="wutb4" type="button">
               <span class="versionTag">Wake Up The Box 4</span>
-              <p>More advanced physics challenges and clever box waking setups.</p>
+              <p>Advanced physics setups with clever box waking tricks.</p>
             </button>
             <button class="gameOption" data-game-id="wutb5" type="button">
               <span class="versionTag">Wake Up The Box 5</span>
@@ -390,19 +508,17 @@
           </div>
           <p id="gameChooserHint">
             Tip: If a game does not load, make sure the SWF files
-            <code>wake up the box 1.swf</code>,
             <code>wake up the box 2.swf</code>,
             <code>wake up the box 3.swf</code>,
             <code>wake up the box 4.swf</code>,
             and <code>wake up the box 5.swf</code> are in the same folder as this <code>index.html</code>.
+            Wake Up The Box 1 uses a remote SWF file from GitHub.
           </p>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- Ruffle loader -->
-  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
   <script>
     // Leave warning
     window.onbeforeunload = () => "Are you sure you want to leave? Your Wake Up The Box progress in this session may be lost.";
@@ -453,7 +569,6 @@
       };
       const ROTATION = [FORM, DISCORD, INSTA];
 
-      // Preload images
       ROTATION.forEach(o => { const p = new Image(); p.src = o.src; });
 
       const T_IN = 2000, T_SHOW = 5000, T_OUT = 2000, T_HIDDEN = 20000;
@@ -505,27 +620,41 @@
       });
     })();
 
-    // Ruffle game boot and game selector
+    // Ruffle game boot and game selector with real player swapping
     (function(){
+      // Use the provided GitHub link for Wake Up The Box 1
+      const WUTB1_URL = "https://raw.githubusercontent.com/StaticQuasar931/Wake-Up-The-Box-2/main/wake%20up%20the%20box%201.swf";
+
       const GAME_LIST = [
-        { id:"wutb1", name:"Wake Up The Box 1", file:"wake up the box 1.swf" },
+        { id:"wutb1", name:"Wake Up The Box 1", file:WUTB1_URL, remote:true },
         { id:"wutb2", name:"Wake Up The Box 2", file:"wake up the box 2.swf" },
         { id:"wutb3", name:"Wake Up The Box 3", file:"wake up the box 3.swf" },
         { id:"wutb4", name:"Wake Up The Box 4", file:"wake up the box 4.swf" },
         { id:"wutb5", name:"Wake Up The Box 5", file:"wake up the box 5.swf" }
       ];
 
-      const container = document.getElementById("gameContainer");
-      const fallback  = document.getElementById("gameFallback");
-      const overlay   = document.getElementById("gameChooserOverlay");
-      const activeBarName = document.getElementById("activeGameName");
-      const switchBtn = document.getElementById("switchGameBtn");
-      const optionButtons = Array.from(document.querySelectorAll(".gameOption"));
+      const container      = document.getElementById("gameContainer");
+      const fallback       = document.getElementById("gameFallback");
+      const overlay        = document.getElementById("gameChooserOverlay");
+      const activeBarName  = document.getElementById("activeGameName");
+      const switchBtn      = document.getElementById("switchGameBtn");
+      const toggleBarBtn   = document.getElementById("toggleBarBtn");
+      const activeGameBar  = document.getElementById("activeGameBar");
+      const optionButtons  = Array.from(document.querySelectorAll(".gameOption"));
+      const closeChooser   = document.getElementById("closeChooserSmall");
 
       let rufflePlayerInstance = null;
+      let currentGameId = null;
 
-      function createPlayerIfNeeded(){
-        if (rufflePlayerInstance || !window.RufflePlayer || !container) return rufflePlayerInstance;
+      function destroyPlayer(){
+        if (rufflePlayerInstance && rufflePlayerInstance.parentNode){
+          rufflePlayerInstance.parentNode.removeChild(rufflePlayerInstance);
+        }
+        rufflePlayerInstance = null;
+      }
+
+      function createPlayer(){
+        if (!window.RufflePlayer || !container) return null;
         const ruffle = window.RufflePlayer.newest();
         const player = ruffle.createPlayer();
         player.style.width = "100%";
@@ -534,8 +663,7 @@
         player.style.inset = "0";
         player.style.zIndex = "1";
         container.appendChild(player);
-        rufflePlayerInstance = player;
-        return rufflePlayerInstance;
+        return player;
       }
 
       function showOverlay(){
@@ -546,11 +674,26 @@
         if (overlay) overlay.style.display = "none";
       }
 
+      function setActiveButton(id){
+        optionButtons.forEach(btn=>{
+          const bid = btn.getAttribute("data-game-id");
+          if (bid === id){
+            btn.classList.add("primary");
+          } else {
+            if (bid !== "wutb1") btn.classList.remove("primary");
+          }
+        });
+      }
+
       function loadGameById(id){
         const selected = GAME_LIST.find(g => g.id === id);
         if (!selected) return;
 
-        const player = createPlayerIfNeeded();
+        currentGameId = id;
+        setActiveButton(id);
+
+        destroyPlayer();
+        const player = createPlayer();
         if (!player){
           if (fallback){
             fallback.style.display = "flex";
@@ -558,20 +701,21 @@
           }
           return;
         }
+        rufflePlayerInstance = player;
 
         if (fallback) fallback.style.display = "flex";
         if (activeBarName) activeBarName.textContent = "Loading " + selected.name + " ...";
 
         player.load(selected.file).then(() => {
           if (fallback) fallback.style.display = "none";
-          if (activeBarName) activeBarName.textContent = selected.name + " - unblocked collection by StaticQuasar931";
+          if (activeBarName) activeBarName.textContent = selected.name + " unblocked collection by StaticQuasar931";
         }).catch(() => {
           if (fallback){
             fallback.style.display = "flex";
             fallback.innerHTML =
               "<div><strong>Could not load " + selected.name + ".</strong><br><br>" +
               "Check that the SWF file <code>" + selected.file +
-              "</code> is in the same folder as this index.html.</div>";
+              "</code> is reachable. For local files, keep them in the same folder as this index.html.</div>";
           }
         });
       }
@@ -585,12 +729,43 @@
         });
       });
 
+      // Small close button hides chooser but does not change game
+      if (closeChooser){
+        closeChooser.addEventListener("click", () => {
+          hideOverlay();
+        });
+      }
+
       // Switch button shows overlay again
       if (switchBtn){
         switchBtn.addEventListener("click", () => {
           showOverlay();
         });
       }
+
+      // Toggle bar size to get rid of the bar if you want more space
+      if (toggleBarBtn && activeGameBar){
+        toggleBarBtn.addEventListener("click", () => {
+          const collapsed = activeGameBar.classList.toggle("collapsed");
+          toggleBarBtn.textContent = collapsed ? "Bar" : "Bar";
+        });
+      }
+
+      // Click outside card closes chooser
+      if (overlay){
+        overlay.addEventListener("click", (e)=>{
+          if (e.target === overlay){
+            hideOverlay();
+          }
+        });
+      }
+
+      // Escape key closes chooser
+      window.addEventListener("keydown", (e)=>{
+        if (e.key === "Escape"){
+          hideOverlay();
+        }
+      });
 
       // Start with overlay visible and no game loaded
       if (overlay) overlay.style.display = "flex";
@@ -607,16 +782,16 @@
       structures, and using gravity to roll, tip, and knock it around.
     </p>
     <p>
-      These Wake Up The Box unblocked games are school-safe, browser based, and made to work at school, work, and home.
+      These Wake Up The Box unblocked games are school safe, browser based, and made to work at school, work, and home.
       They are friendly for Chromebook players and classroom environments. Just select a version on the starter menu
-      and the SWF is loaded into Ruffle automatically.
+      and the SWF is loaded into Ruffle automatically, with a clean fullscreen layout.
     </p>
     <p>
       Keywords: Wake Up The Box, Wake Up The Box 1, Wake Up The Box 2, Wake Up The Box 3, Wake Up The Box 4,
       Wake Up The Box 5, Wake Up The Box series, Wake Up The Box unblocked, Wake Up The Box 1 unblocked,
       Wake Up The Box 2 unblocked, Wake Up The Box 3 unblocked, Wake Up The Box 4 unblocked, Wake Up The Box 5 unblocked,
       Wake Up The Box game, Wake Up The Box g@me, physics puzzle game unblocked, puzzle g@mes for school,
-      puzzle games working at school, school-safe puzzle games, classroom friendly games, StaticQuasar931, staticquasar931,
+      puzzle games working at school, school safe puzzle games, classroom friendly games, StaticQuasar931, staticquasar931,
       static 931, staticq, staticq931, unblocked games, unblocked g@mes, free school games, free school g@mes.
     </p>
     <p>
